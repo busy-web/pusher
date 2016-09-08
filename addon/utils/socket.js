@@ -1,3 +1,4 @@
+/* globals BusyPusher */
 /**
  * @module Utils
  *
@@ -6,6 +7,7 @@ import Ember from 'ember';
 import Time from 'busy-utils/utils/time';
 import UUID from 'busy-utils/utils/uuid';
 import assert from 'busy-utils/utils/assert';
+import pusher from 'pusher';
 
 /**
  * `Util/Socket`
@@ -33,7 +35,7 @@ const Socket = Ember.Object.extend(Ember.Evented, {
 	 * @method init
 	 */
 	init() {
-		if (BusyApp.DEBUG_MODE) {
+		if (BusyPusher.DEBUG_MODE) {
 			this.set('_debugKey', UUID.generate());
 		}
 
@@ -188,10 +190,10 @@ Socket.reopenClass({
 
 		// TODO:
 		// channel type needs to be set to modelType
-		let channel = BusyApp.pusher.channel('test_channel');
+		let channel = pusher.channel('test_channel');
 		if(!channel) {
 			// set channel
-			channel = BusyApp.pusher.subscribe('test_channel');
+			channel = pusher.subscribe('test_channel');
 
 			// handle connect success
 			channel.bind('pusher:subscription_succeeded', () => {
