@@ -46,7 +46,7 @@
     "busybusy"
   ],
   "dependencies": {
-    "busy-utils": "0.0.2",
+    "busy-utils": "1.0.0",
     "ember-cli-babel": "^5.1.6",
     "pusher-js": "^3.2.1"
   },
