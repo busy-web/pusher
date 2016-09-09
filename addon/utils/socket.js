@@ -7,7 +7,6 @@ import Ember from 'ember';
 import Time from 'busy-utils/utils/time';
 import UUID from 'busy-utils/utils/uuid';
 import assert from 'busy-utils/utils/assert';
-import pusher from 'pusher';
 
 /**
  * `Util/Socket`
@@ -190,10 +189,10 @@ Socket.reopenClass({
 
 		// TODO:
 		// channel type needs to be set to modelType
-		let channel = pusher.channel('test_channel');
+		let channel = BusyPusher.pusher.channel('test_channel');
 		if(!channel) {
 			// set channel
-			channel = pusher.subscribe('test_channel');
+			channel = BusyPusher.pusher.subscribe('test_channel');
 
 			// handle connect success
 			channel.bind('pusher:subscription_succeeded', () => {

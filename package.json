@@ -46,7 +46,9 @@
     "busybusy"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.6"
+    "ember-browserify": "^1.1.12",
+    "ember-cli-babel": "^5.1.6",
+    "pusher-js": "^3.2.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
