@@ -4,9 +4,9 @@
  *
  */
 import Ember from 'ember';
-import Time from 'busy-utils/utils/time';
-import UUID from 'busy-utils/utils/uuid';
-import assert from 'busy-utils/utils/assert';
+import Time from 'busy-utils/time';
+import UUID from 'busy-utils/uuid';
+import assert from 'busy-utils/assert';
 
 /**
  * `Util/Socket`
@@ -17,9 +17,13 @@ import assert from 'busy-utils/utils/assert';
  */
 const Socket = Ember.Object.extend(Ember.Evented, {
 	type: null,
+
 	modelType: null,
 	eventType: null,
+	channelType: null,
+
 	queryParams: null,
+
 	channel: null,
 
 	lastSync: null,
@@ -167,10 +171,11 @@ Socket.reopenClass({
 	/**
 	 * create class override
 	 */
-	create(store, modelType, eventType, query) {
-		assert.funcNumArgs(arguments, 4);
+	create(store, modelType, channelType, eventType, query) {
+		assert.funcNumArgs(arguments, 5);
 		assert.isObject(store);
 		assert.isString(modelType);
+		assert.isString(channelType);
 		assert.isString(eventType);
 
 		const owner = Ember.getOwner(store);
@@ -178,6 +183,7 @@ Socket.reopenClass({
 
 		socket.store = store;
 		socket.set('modelType', modelType);
+		socket.set('channelType', channelType);
 		socket.set('eventType', eventType);
 		socket.set('queryParams', query);
 
@@ -189,10 +195,10 @@ Socket.reopenClass({
 
 		// TODO:
 		// channel type needs to be set to modelType
-		let channel = BusyPusher.pusher.channel('test_channel');
+		let channel = BusyPusher.pusher.channel(channelType);
 		if(!channel) {
 			// set channel
-			channel = BusyPusher.pusher.subscribe('test_channel');
+			channel = BusyPusher.pusher.subscribe(channelType);
 
 			// handle connect success
 			channel.bind('pusher:subscription_succeeded', () => {

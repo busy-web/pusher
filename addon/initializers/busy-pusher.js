@@ -1,49 +1,58 @@
-import Pusher from 'npm:pusher-js';
 
 export function initialize(app) {
-  console.log('app', app);
+	const BusyPusher = app["busy-pusher"] || {};
 
-  const BusyPusher = app;
+	if (BusyPusher.PUBLIC_KEY) {
+		const args = {};
 
-   //if (BusyPusher.SOCKETS) {
-     //setup socket listener
-     const pusher = new Pusher(BusyPusher.PUSHER_KEY, { cluster: BusyPusher.PUSHER_CLUSTER, encrypted: true });
+		if (BusyPusher.CLUSTER) {
+			args.cluster = BusyPusher.PUSHER_CLUSTER;
+		}
 
-     // debug socket data
-     //if (BusyPusher.DEBUG_MODE) {
-       /**
-       * pusher connected
-       */
-       pusher.connection.bind('connected', function() {
-         window.console.log('pusher is connected');
-       });
+		if (BusyPusher.ENCRYPTED) {
+			args.encrypted = true;
+		}
 
-       /**
-       * pusher connecting in
-       */
-       pusher.connection.bind('connecting_in', function(delay) {
-         window.console.log("I haven't been able to establish a connection for this feature. I will try again in " + delay + " seconds.");
-       });
+		if (BusyPusher.ENABLED) {
+			//setup socket listener
+			const pusher = new window.Pusher(BusyPusher.PUBLIC_KEY, args);
 
-       /**
-       * pusher state change
-       */
-       pusher.connection.bind('state_change', function(states) {
-         window.console.log('pusher state', states.current);
-       });
+			// debug socket data
+			if (BusyPusher.DEBUG) {
+				/**
+				* pusher connected
+				*/
+				pusher.connection.bind('connected', function() {
+					window.console.log('pusher is connected');
+				});
 
-       /**
-       * pusher error handler
-       */
-       pusher.connection.bind('error', function(err) {
-         window.console.log('pusher error', err);
-       });
-     //}
+				/**
+				* pusher connecting in
+				*/
+				pusher.connection.bind('connecting_in', function(delay) {
+					window.console.log("I haven't been able to establish a connection for this feature. I will try again in " + delay + " seconds.");
+				});
 
-     BusyPusher.pusher = pusher;
-   //}
+				/**
+				* pusher state change
+				*/
+				pusher.connection.bind('state_change', function(states) {
+					window.console.log('pusher state', states.current);
+				});
 
-  window.BusyPusher = BusyPusher;
+				/**
+				* pusher error handler
+				*/
+				pusher.connection.bind('error', function(err) {
+					window.console.log('pusher error', err);
+				});
+			}
+
+			BusyPusher.pusher = pusher;
+		}
+	}
+
+	window.BusyPusher = BusyPusher;
 }
 
 export default {

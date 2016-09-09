@@ -1,4 +1,4 @@
-import socket from 'dummy/utils/socket';
+import socket from 'dummy/socket';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | socket');
