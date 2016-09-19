@@ -1,12 +1,12 @@
-# Busy-pusher
+[![Build Status](https://travis-ci.org/busybusy/webapp-busy-pusher.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-pusher)
+
+# busy pusher
 
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `ember install busy-pusher`
 
 ## Running
 
