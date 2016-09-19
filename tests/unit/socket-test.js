@@ -5,6 +5,6 @@ module('Unit | Utility | socket');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = socket();
+  let result = socket;
   assert.ok(result);
 });
