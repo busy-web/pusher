@@ -1,3 +1,4 @@
+import Ember from 'ember';
 
 export function initialize(app) {
 	const BusyPusher = app["busy-pusher"] || {};
@@ -23,28 +24,28 @@ export function initialize(app) {
 				* pusher connected
 				*/
 				pusher.connection.bind('connected', function() {
-					window.console.log('pusher is connected');
+					Ember.Logger.log('pusher is connected');
 				});
 
 				/**
 				* pusher connecting in
 				*/
 				pusher.connection.bind('connecting_in', function(delay) {
-					window.console.log("I haven't been able to establish a connection for this feature. I will try again in " + delay + " seconds.");
+					Ember.Logger.log("I haven't been able to establish a connection for this feature. I will try again in " + delay + " seconds.");
 				});
 
 				/**
 				* pusher state change
 				*/
 				pusher.connection.bind('state_change', function(states) {
-					window.console.log('pusher state', states.current);
+					Ember.Logger.log('pusher state', states.current);
 				});
 
 				/**
 				* pusher error handler
 				*/
 				pusher.connection.bind('error', function(err) {
-					window.console.log('pusher error', err);
+					Ember.Logger.log('pusher error', err);
 				});
 			}
 

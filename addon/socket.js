@@ -146,7 +146,6 @@ const Socket = Ember.Object.extend(Ember.Evented, {
 	 * @param err {object}
 	 */
 	error(err) {
-		window.console.log('error', err);
 		this.trigger('error', err, this);
 	},
 
