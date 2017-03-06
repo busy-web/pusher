@@ -3,7 +3,7 @@
  *
  */
 import Ember from 'ember';
-import assert from 'busy-utils/assert';
+import { Assert } from 'busy-utils';
 import socket from 'busy-pusher/socket';
 
 /**
@@ -33,10 +33,10 @@ export default Ember.Mixin.create({
 	 * @returns {Socket}
 	 */
 	querySocket(modelType, channelType, eventType, query) {
-		assert.funcNumArgs(arguments, 4, true);
-		assert.isString(modelType);
-		assert.isString(eventType);
-		assert.isObject(query);
+		Assert.funcNumArgs(arguments, 4, true);
+		Assert.isString(modelType);
+		Assert.isString(eventType);
+		Assert.isObject(query);
 
 		return socket.create(this, modelType, channelType, eventType, query);
 	},
@@ -52,10 +52,10 @@ export default Ember.Mixin.create({
 	 * @returns {Socket}
 	 */
 	findRecordSocket(modelType, channelType, eventType, id) {
-		assert.funcNumArgs(arguments, 4, true);
-		assert.isString(modelType);
-		assert.isString(eventType);
-		assert.isString(id);
+		Assert.funcNumArgs(arguments, 4, true);
+		Assert.isString(modelType);
+		Assert.isString(eventType);
+		Assert.isString(id);
 
 		return socket.create(this, modelType, channelType, eventType, id);
 	}

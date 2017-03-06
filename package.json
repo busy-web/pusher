@@ -46,7 +46,7 @@
     "busybusy"
   ],
   "dependencies": {
-    "busy-utils": "2.0.1",
+    "busy-utils": "2.2.4",
     "broccoli-funnel": "^1.0.6",
     "broccoli-merge-trees": "^1.1.4",
     "ember-cli-babel": "^5.1.6",

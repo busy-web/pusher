@@ -4,9 +4,7 @@
  *
  */
 import Ember from 'ember';
-import Time from 'busy-utils/time';
-import UUID from 'busy-utils/uuid';
-import assert from 'busy-utils/assert';
+import { Time, UUID, Assert } from 'busy-utils';
 
 /**
  * `Util/Socket`
@@ -171,11 +169,11 @@ Socket.reopenClass({
 	 * create class override
 	 */
 	create(store, modelType, channelType, eventType, query) {
-		assert.funcNumArgs(arguments, 5);
-		assert.isObject(store);
-		assert.isString(modelType);
-		assert.isString(channelType);
-		assert.isString(eventType);
+		Assert.funcNumArgs(arguments, 5);
+		Assert.isObject(store);
+		Assert.isString(modelType);
+		Assert.isString(channelType);
+		Assert.isString(eventType);
 
 		const owner = Ember.getOwner(store);
 		const socket = this._create(owner.ownerInjection());
