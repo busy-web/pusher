@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+.vscode
 
 # dependencies
 /node_modules
